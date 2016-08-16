@@ -18,7 +18,6 @@ int main(){
 		if(a.size() > b.size()) b = aux + b;
 		else a = aux + a;
 
-
 		int ci = 0;
 
 		string res = "";
