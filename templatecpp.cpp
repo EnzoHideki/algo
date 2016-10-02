@@ -12,7 +12,7 @@
 #include <queue>
 #include <ios>
 #include <iomanip>
-#define dbg(args.) //fprintf(stderr, args)
+#define dbg(args...) //fprintf(stderr, args)
 #define dbc(x) //cerr << x << "\n"
 #define dbn(x) //cerr << #x << " == " << x << "\n"
 #define m(x) memset(x,0,sizeof(x))
