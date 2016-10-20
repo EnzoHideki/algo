@@ -38,20 +38,7 @@ const int INF = 0x3f3f3f3f;
 //
 
 int main(){
-	//ios::sync_with_stdio(false);
-
-	ll r, g, b;
-
-	//scanf("%I64x%I64x%I64x",&r,&g,&b);
-	cin >> hex >> r >> g >> b;
-
-	ll a = r/g;
-	ll c = g/b;
-
-	ll ans = 1 + a*a + a*a*c*c;
-
-	cout << uppercase << hex << ans << endl;
-	//printf("%I64x\n",ans);
+	ios::sync_with_stdio(false);
 }
 
 
