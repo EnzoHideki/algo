@@ -1,11 +1,3 @@
-def reverse(ss):
-	nw = []
-	size = len(ss)
-	for i in range(size-1, -1, -1):
-		nw.append(ss[i])
-
-	return nw
-
 def isP(ss):
 	size = len(ss)
 	for i in range(0, size):
@@ -19,7 +11,7 @@ for i in range (1,10001):
 	n = i
 	ok = True
 	for j in range(0,50):
-		n = n + int(''.join(reverse(str(n))))
+		n = n + int(str(n)[::-1])
 		if isP(str(n)):
 			ok = False
 			break
