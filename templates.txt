@@ -18,8 +18,8 @@
 #include <unistd.h>
 #include <vector>
 #define dbg(args...) //fprintf(stderr, args)
-#define dbc(x) //cerr << x << "\n"
-#define dbn(x) //cerr << #x << " == " << x << "\n"
+#define dbc(x) cerr << x << "\n"
+#define dbn(x) cerr << #x << " == " << x << "\n"
 #define m(x) memset(x,0,sizeof(x))
 #define m1(x) memset(x,1,sizeof(x))
 #define minf(x) memset(x,63,sizeof(x))
