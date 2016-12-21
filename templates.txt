@@ -32,8 +32,6 @@ using namespace std;
 
 typedef long long ll;
 typedef pair<int,int> pii;
-typedef vector<int> vi;
-typedef set<int> si;
 
 const int INF = 0x3f3f3f3f;
 
