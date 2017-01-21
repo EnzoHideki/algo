@@ -19,11 +19,11 @@
 #include <utility>
 #include <vector>
 #define dbg(args...) //fprintf(stderr, args)
-#define dbc(x) cerr << x << "\n"
-#define dbn(x) cerr << #x << " == " << x << "\n"
+#define dbc(x) cerr << x << '\n'
+#define dbn(x) cerr << #x << " == " << x << '\n'
 #define m(v,x) memset(v,x,sizeof(v))
 #define pb push_back
-#define eb emplace_back
+#define endl '\n'
 #define F first
 #define S second
 
