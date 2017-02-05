@@ -47,6 +47,8 @@ int main(){
 
 
 import java.io.*;
+import java.lang.*;
+import java.math.*;
 import java.util.*;
 
 public class Main {
@@ -66,6 +68,10 @@ public class Main {
 
 		public MyScanner() {
 			 br = new BufferedReader(new InputStreamReader(System.in));
+		}
+
+		public MyScanner(String file) throws FileNotFoundException {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(file))));
 		}
 
 		String next() {
