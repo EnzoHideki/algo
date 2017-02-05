@@ -55,7 +55,7 @@ public class Main {
 	static final int MAXN = 112345;
 	static int[] v = new int[MAXN];
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		MyScanner in = new MyScanner();
 		PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
 
