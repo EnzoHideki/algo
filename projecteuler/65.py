@@ -42,8 +42,6 @@ class Fraction:
 		common = lcm(self.den, other.den)
 		return Fraction((common//self.den)*self.num + (common//other.den)*other.num, common)
 
-	def __div__(self, other):
-		return Fraction(self.num*other.den, self.den*other.num)
 
 def main():
 	gen()
