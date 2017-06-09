@@ -1,22 +1,21 @@
 #!/bin/bash
 set -e                                  # stops script on error (such as compilation error)
-g++ $1 -O2 -Wall -std=c++11 -g          # $1 contains first command-line argument
+g++ $1 -O2 -Wall -std=c++11 -g
 
-for i in in*
+for i in $(seq 1 $2)
 do
-    j=$(echo $i | tail -c +3)
-    ./a.out < $i > "out$j"
-    if [ -z "$(diff -B out$j ans$j)" ]  # -z -> true if string is empty
+    ./a.out < "in$i" > "out$i"
+    if [ -z "$(diff -B out$i ans$i)" ]  # -z -> true if string is empty
     then
-        echo "Test $j: ok"
+        echo "Test $i: ok"
     else
-        echo "Test $j: wa (or presentation error)"
+        echo "Test $i: wa (or presentation error)"
 
         echo "Correct answer:"
-        cat "ans$j"
+        cat "ans$i"
         echo ""
         echo "Author's answer:"
-        cat "out$j"
+        cat "out$i"
         echo ""
     fi
 done
