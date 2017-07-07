@@ -38,3 +38,9 @@ islower(x) -> checa se o caractere x eh uma letra minúscula
 isupper(x) -> checa se o caractere x eh uma letra maiúscula
 tolower(x) -> converte maiúscula para minúscula
 toupper(x) -> converte minúscula para maiúscula
+
+
+#include<cstring>
+insert (size_t pos, const string& str) -> Inserts before the character indicated by pos (or p) [O(n)]
+erase (size_t pos = 0, size_t len = npos) [O(n)]
+substr (size_t pos = 0, size_t len = npos) const; [O(len)]
