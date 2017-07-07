@@ -1,0 +1,40 @@
+//Esta eh uma miscelanea de funcoes uteis para competicoes
+
+
+atoi(#nome do vetor) -> converte vetor de char para inteiro
+atoll(#nome do vetor) -> converte vetor de char para long long
+strtol(#nome do vetor, null, base) -> converte o vetor de char interpretado na base informada para long int
+stoi(#nome da string) -> converte string para inteiro [C++11] (atencao: nao colocar uma string com valor maior q INT_MAX)
+stoll(#nome da string) -> converte string para long long [C++11] (atencao: nao colocar uma string com valor maior q LLONG_MAX)
+to_string(x) -> converte um valor numerico x (int, long long, double, float, etc.) para string [C++11]
+
+
+(#nome da string).find_first_of("213") -> retorna primeiro indice da string referente a um char q se encontra no parametro (no caso, o primeiro indice da string cujo char eh '2', ou '1', ou '3') ou string::npos caso não encontrado
+(#nome da string).find_first_not_of("213") -> retorna primeiro indice da string referente a um char q nao se encontra no parametro (no caso, o primeiro indice da string cujo char nao eh '2', nem '1', nem '3') ou string::npos caso não encontrado
+(#nome da string).find_last_of("213") -> retorna ultimo indice da string referente a um char q se encontra no parametro (no caso, o ultimo indice da string cujo char eh '2', ou '1', ou '3') ou string::npos caso não encontrado
+(#nome da string).find_last_not_of("213") -> retorna ultimo indice da string referente a um char q nao se encontra no parametro (no caso, o ultimo indice da string cujo char nao eh '2', ou '1', ou '3') ou string::npos caso não encontrado
+
+
+reverse(v.begin(), v.end()) -> Inverte a ordem dos elementos do range especificado em tempo linear na metade da distancia entre comeco e fim
+
+
+next_permutation(v.begin(), v.end()) -> gera proxima permutacao lexicografica de um vetor (de char, de inteiros, etc.)
+prev_permutation(v.begin(), v.end()) -> gera permutacao lexicografica anterior de um vetor (de char, de inteiros, etc.)
+
+
+hypot(x, y) -> calcula a raiz quadrada da soma dos quadrados de x e y
+
+
+__builtin_popcount(x) -> retorna a quantidade de bits '1' do binario do numero inteiro x
+__builtin_popcountll(x) -> retorna a quantidade de bits '1' do binario do numero long long x
+__builtin_ctz(x) -> retorna a quantidade de trailing zeroes (bits menos significativos) do binario do numero inteiro x
+__builtin_ctzll(x) -> retorna a quantidade de trailing zeroes (bits menos significativos) do binario do numero long long x
+__builtin_clz(x) -> retorna a quantidade de leading zeroes (bits mais significativos) do binario do numero inteiro x
+__builtin_clzll(x) -> retorna a quantidade de leading zeroes (bits mais significativos) do binario do numero long long x
+
+
+isdigit(x) -> checa se o caractere x eh um digito decimal (0,1,2,3,4,5,6,7,8,9)
+islower(x) -> checa se o caractere x eh uma letra minúscula
+isupper(x) -> checa se o caractere x eh uma letra maiúscula
+tolower(x) -> converte maiúscula para minúscula
+toupper(x) -> converte minúscula para maiúscula
