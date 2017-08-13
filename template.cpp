@@ -25,8 +25,6 @@
 #define m(v,x) memset(v,x,sizeof(v))
 #define pb push_back
 #define endl '\n'
-#define F first
-#define S second
 
 using namespace std;
 
