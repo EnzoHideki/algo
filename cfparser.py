@@ -20,6 +20,7 @@ def parse_task():
         sys.exit(0)
  
     assert(len(a) == len(b))
+
     for i in xrange(len(a)):
         a[i] = a[i][16:-6].replace('<br />', '\n')
         b[i] = b[i][17:-6].replace('<br />', '\n')
@@ -29,5 +30,7 @@ def parse_task():
             print >> f, a[i]
         with open("ans" + str(i+1), "w") as f:
             print >> f, b[i]
+
+    print len(a), "tests parsed!"
 
 parse_task()
