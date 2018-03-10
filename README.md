@@ -1,6 +1,6 @@
 # About the scripts
 
-## cfparser.py:
+## cfparser.py
 Script to parse Codeforces tests
 
 How to use: Run "python cfparser.py [contest id] [problem letter]".
