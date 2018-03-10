@@ -24,6 +24,7 @@ How to use:
 
 Put the test cases in a file named 'tests' in the following format:
 
+```
 (input)
 ans:
 (expected output)
@@ -35,5 +36,6 @@ ans:
 .
 .
 .
+```
 
 Then, run "python check.py [file name]".
