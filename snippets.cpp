@@ -1,33 +1,56 @@
+#define dbv(x) cerr << #x << " == [ "; for (int i=0; i<int(x.size()); i++) { cerr << x[i] << " "; } cerr << "]\n";
+
+struct mat {
+	int a, b;
+	int v[20][20];
+
+	mat(int a = 1, int b = 1) : a(a), b(b) {
+		m(v,0);
+	}
+
+	mat operator * (mat other) {
+		assert(b == other.a);
+
+		mat m = mat(this -> a, other.b);
+
+		for (int i=0; i<this -> a; i++) {
+			for (int j=0; j<other.b; j++) {
+				for (int k=0; k<this -> b; k++) {
+					m.v[i][j] = (m.v[i][j] + (this -> v[i][k] * other.v[k][j]) % MOD) % MOD;
+				}
+			}
+		}
+
+		return m;
+	}
+};
+
+mat id(int n) {
+	mat m = mat(n,n);
+
+	for (int i=0; i<n; i++) {
+		m.v[i][i] = 1;
+	}
+
+	return m;
+}
+
+inline void dbm(mat m) {
+	for (int i=0; i<m.a; i++) {
+		for (int j=0; j<m.b; j++) {
+			cerr << m.v[i][j] << " ";
+		}
+		cerr << endl;
+	}
+}
+
 #define LOCAL
-#include <functional>
-#include <algorithm>
-#include <iostream>
 #include <fstream>
 #include <sstream>
-#include <iomanip>
 #include <numeric>
-#include <cstring>
-#include <cassert>
-#include <cstdio>
-#include <string>
-#include <vector>
-#include <bitset>
-#include <queue>
-#include <stack>
-#include <cmath>
-#include <ctime>
-#include <list>
-#include <set>
-#include <map>
 
 using namespace std;
 
-#define REP(i, n) for (int i=0;i<int(n);++i)
-#define FOR(i, a, b) for (int i=int(a);i<int(b);++i)
-#define DWN(i, b, a) for (int i=int(b-1);i>=int(a);--i)
-#define REP_1(i, n) for (int i=1;i<=int(n);++i)
-#define FOR_1(i, a, b) for (int i=int(a);i<=int(b);++i)
-#define DWN_1(i, b, a) for (int i=int(b);i>=int(a);--i)
 #define REP_C(i, n) for (int n____=int(n),i=0;i<n____;++i)
 #define FOR_C(i, a, b) for (int b____=int(b),i=a;i<b____;++i)
 #define DWN_C(i, b, a) for (int a____=int(a),i=b-1;i>=a____;--i)
@@ -67,11 +90,8 @@ using namespace std;
 #define BSC(A, x) (lower_bound(ALL(A), x) - A.begin())
 #define CTN(T, x) (T.find(x) != T.end())
 #define SZ(A) int(A.size())
-#define PB push_back
-#define MP(A, B) make_pair(A, B)
+
 #define PTT pair<T, T>
-#define fi first
-#define se second
 
 #define Rush for(int ____T=RD(); ____T--;)
 
@@ -96,26 +116,8 @@ using namespace std;
 #define Python system("python main.py")
 #define Pascal system("fpc main.pas")
 
-typedef long long LL;
-//typedef long double DB;
-typedef double DB;
 typedef unsigned UINT;
 typedef unsigned long long ULL;
-
-typedef vector<int> VI;
-typedef vector<char> VC;
-typedef vector<string> VS;
-typedef vector<LL> VL;
-typedef vector<DB> VF;
-typedef set<int> SI;
-typedef set<string> SS;
-typedef map<int, int> MII;
-typedef map<string, int> MSI;
-typedef pair<int, int> PII;
-typedef pair<LL, LL> PLL;
-typedef vector<PII> VII;
-typedef vector<VI> VVI;
-typedef vector<VII> VVII;
 
 template<class T> inline T& RD(T &);
 template<class T> inline void OT(const T &);
@@ -201,24 +203,13 @@ template<class T> inline T& UNQ(T &A){A.resize(unique(ALL(SRT(A)))-A.begin());re
 //}
 
 /** Constant List .. **/ //{
-
-const int dx4[] = {-1, 0, 1, 0};
-const int dy4[] = {0, 1, 0, -1};
-
 const int dx8[] = {-1, 0, 1, 0 , -1 , -1 , 1 , 1};
 const int dy8[] = {0, 1, 0, -1 , -1 , 1 , -1 , 1};
 
 const int dxhorse[] = {-2 , -2 , -1 , -1 , 1 , 1 , 2 , 2};
 const int dyhorse[] = {1 ,  -1 , 2  , -2 , 2 ,-2 , 1 ,-1};
 
-const int MOD = 1000000007;
 //int MOD = 99990001;
-const int INF = 0x3f3f3f3f;
-const LL INFF = 1LL << 60;
-const DB EPS = 1e-9;
-const DB OO = 1e15;
-const DB PI = acos(-1.0); //M_PI;
-
 //}
 
 /** Add On .. **/ //{
@@ -489,82 +480,65 @@ int dblcmp(double d)
     return d < -eps ? -1 : d > eps;
 }
 inline double sqr(double x){return x*x;}
-struct point
-{
+struct point {
     double x,y;
     point(){}
-    point(double _x,double _y):
-    x(_x),y(_y){};
-    void input()
-    {
+    point(double _x, double _y) : x(_x),y(_y){};
+    void input() {
         scanf("%lf%lf",&x,&y);
     }
-    void output()
-    {
+    void output() {
         printf("%.2f %.2f\n",x,y);
     }
-    bool operator==(point a)const
-    {
+    bool operator==(point a)const {
         return dblcmp(a.x-x)==0&&dblcmp(a.y-y)==0;
     }
-    bool operator<(point a)const
-    {
+    bool operator<(point a)const {
         return dblcmp(a.x-x)==0?dblcmp(y-a.y)<0:x<a.x;
     }
-    double len()
-    {
+    double len() {
         return hypot(x,y);
     }
-    double len2()
-    {
+    double len2() {
         return x*x+y*y;
     }
-    double distance(point p)
-    {
+    double distance(point p) {
         return hypot(x-p.x,y-p.y);
     }
-    double distance2(point p)
-    {
+    double distance2(point p) {
         return sqr(x-p.x)+sqr(y-p.y);
     }
-    point add(point p)
-    {
+    point add(point p) {
         return point(x+p.x,y+p.y);
     }
     point operator + (const point & p) const{
         return point(x+p.x,y+p.y);
     }
-    point sub(point p)
-    {
+    point sub(point p) {
         return point(x-p.x,y-p.y);
     }
     point operator - (const point & p) const{
         return point(x-p.x,y-p.y);
     }
-    point mul(double b)
-    {
+    point mul(double b) {
         return point(x*b,y*b);
     }
-    point div(double b)
-    {
+    point div(double b) {
         return point(x/b,y/b);
     }
-    double dot(point p)
-    {
+    double dot(point p) {
         return x*p.x+y*p.y;
     }
     double operator * (const point & p) const{
         return x*p.x+y*p.y;
     }
-    double det(point p)
-    {
+    double det(point p) {
         return x*p.y-y*p.x;
     }
     double operator ^ (const point & p) const{
         return x*p.y-y*p.x;
     }
-    double rad(point a,point b)
-    {
+    double rad(point a,point b) {
     	point p=*this;
     	return fabs(atan2(fabs(a.sub(p).det(b.sub(p))),a.sub(p).dot(b.sub(p))));
 	}
@@ -575,12 +549,10 @@ struct point
 		r/=l;
 		return point(x*r,y*r);
 	}
-    point rotleft()
-    {
+    point rotleft() {
         return point(-y,x);
     }
-    point rotright()
-    {
+    point rotright() {
         return point(y,-x);
     }
     point rotate(point p,double angle)//�Ƶ�p��ʱ����תangle�Ƕ�
