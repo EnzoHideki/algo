@@ -1,47 +1,40 @@
 #define dbv(x) cerr << #x << " == [ "; for (int i=0; i<int(x.size()); i++) { cerr << x[i] << " "; } cerr << "]\n";
 
 struct mat {
-	int a, b;
-	int v[20][20];
+    int a, b;
+    int v[SIZE][SIZE];
 
-	mat(int a = 1, int b = 1) : a(a), b(b) {
-		m(v,0);
-	}
+    mat(int a = 1, int b = 1) : a(a), b(b) {
+        memset(v, 0, sizeof(v));
+    }
 
-	mat operator * (mat other) {
-		assert(b == other.a);
+    int* operator [] (int i) {
+        return v[i];
+    }
 
-		mat m = mat(this -> a, other.b);
-
-		for (int i=0; i<this -> a; i++) {
-			for (int j=0; j<other.b; j++) {
-				for (int k=0; k<this -> b; k++) {
-					m.v[i][j] = (m.v[i][j] + (this -> v[i][k] * other.v[k][j]) % MOD) % MOD;
-				}
-			}
-		}
-
-		return m;
-	}
+    mat operator * (mat other) {
+        assert(b == other.a);
+        mat m = mat(a, other.b);
+        for (int i=0; i<a; i++)
+            for (int j=0; j<other.b; j++)
+                for (int k=0; k<b; k++)
+                    m[i][j] += v[i][k] * other[k][j];
+        return m;
+    }
 };
 
 mat id(int n) {
-	mat m = mat(n,n);
-
-	for (int i=0; i<n; i++) {
-		m.v[i][i] = 1;
-	}
-
-	return m;
+    mat m = mat(n,n);
+    for (int i=0; i<n; i++) m.v[i][i] = 1;
+    return m;
 }
 
 inline void dbm(mat m) {
-	for (int i=0; i<m.a; i++) {
-		for (int j=0; j<m.b; j++) {
-			cerr << m.v[i][j] << " ";
-		}
-		cerr << endl;
-	}
+    for (int i=0; i<m.a; i++) {
+        for (int j=0; j<m.b; j++)
+            cerr << m.v[i][j] << " ";
+        cerr << endl;
+    }
 }
 
 #define LOCAL
