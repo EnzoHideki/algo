@@ -15,7 +15,7 @@ How to use: Run "bash check [file name] [number of tests]", and the script will 
 
 
 ## check.py
-Script to run tests in a single file
+Script to run tests in a single file. It uses python 2.
 - Easier to put custom tests
 - Simpler/Folder less poluted (less files)
 - In general, better with non-Codeforces contests (because it's simpler, once you don't have cfparser.py)
