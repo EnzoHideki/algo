@@ -1,6 +1,6 @@
 # About the scripts
 
-## cfparser.py
+## cfparser.py (need requests module)
 Script to parse Codeforces tests
 
 How to use: Run "python cfparser.py [contest id] [problem letter]". Then, the input will be parsed and stored in files in1, in2, in3..., and the expected output will be parsed and stored in files ans1, ans2, ans3...
