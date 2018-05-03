@@ -22,7 +22,6 @@
 #include <vector>
 #define dbc(x) cerr << x << '\n'
 #define dbn(x) cerr << #x << " == " << x << '\n'
-#define m(v,x) memset(v,x,sizeof(v))
 #define pb push_back
 #define endl '\n'
 
