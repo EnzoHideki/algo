@@ -18,6 +18,7 @@ void modify(int id, int x) {
 		seg[i] = seg[i*2]+seg[i*2+1];
 }
 
+// [l, r)
 int query(int l, int r) {
 	int ans = 0;
 	l += n, r += n;
