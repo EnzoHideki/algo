@@ -3,27 +3,27 @@ using namespace std;
 
 const int N = 1e5;
 int n;
-int t[2 * N];
+int seg[2 * N];
 
 void build() {
 	for (int i = n-1; i > 0; i--)
-		t[i] = t[i*2]+t[i*2+1];
+		seg[i] = seg[i*2]+seg[i*2+1];
 }
 
 void modify(int id, int x) {
 	id += n;
-	t[id] = x;
+	seg[id] = x;
 	id /= 2;
 	for (int i = id; i >= 1; i /= 2)
-		t[i] = t[i*2]+t[i*2+1];
+		seg[i] = seg[i*2]+seg[i*2+1];
 }
 
 int query(int l, int r) {
 	int ans = 0;
 	l += n, r += n;
 	while (l < r) {
-		if (l%2 != 0) ans += t[l++];
-		if (r%2 != 0) ans += t[--r];
+		if (l%2 != 0) ans += seg[l++];
+		if (r%2 != 0) ans += seg[--r];
 		l /= 2;
 		r /= 2;
 	}
@@ -32,7 +32,7 @@ int query(int l, int r) {
 
 int main() {
 	scanf("%d", &n);
-	for (int i = 0; i < n; ++i) scanf("%d", t + n + i);
+	for (int i = 0; i < n; ++i) scanf("%d", seg + n + i);
 	build();
 	printf("%d\n", query(3, 11));
 	modify(3, 5);
