@@ -1,5 +1,11 @@
 #define dbv(x) cerr << #x << " == [ "; for (int i=0; i<int(x.size()); i++) { cerr << x[i] << " "; } cerr << "]\n";
 
+template <class T>
+inline void sortunique(vector<T> &v) {
+    sort(v.begin(), v.end());
+    v.resize(distance(v.begin(), unique(v.begin(), v.end())));
+}
+
 struct mat {
     int a, b;
     int v[SIZE][SIZE];
@@ -43,7 +49,6 @@ template<class T, class U> ostream& operator << (ostream& out, pair<T,U>& p) {
     return out;
 }
 
-#define LOCAL
 #include <fstream>
 #include <sstream>
 #include <numeric>
@@ -81,14 +86,12 @@ using namespace std;
 #define REP_4(i, j, k, ii, n, m, l, nn) REP(i, n) REP(j, m) REP(k, l) REP(ii, nn)
 #define REP_4_1(i, j, k, ii, n, m, l, nn) REP_1(i, n) REP_1(j, m) REP_1(k, l) REP_1(ii, nn)
 
-#define ALL(A) A.begin(), A.end()
-#define LLA(A) A.rbegin(), A.rend()
+
 #define CPY(A, B) memcpy(A, B, sizeof(A))
 #define INS(A, P, B) A.insert(A.begin() + P, B)
 #define ERS(A, P) A.erase(A.begin() + P)
 #define BSC(A, x) (lower_bound(ALL(A), x) - A.begin())
 #define CTN(T, x) (T.find(x) != T.end())
-#define SZ(A) int(A.size())
 
 #define PTT pair<T, T>
 
@@ -115,8 +118,6 @@ using namespace std;
 #define Python system("python main.py")
 #define Pascal system("fpc main.pas")
 
-typedef unsigned UINT;
-typedef unsigned long long ULL;
 
 template<class T> inline T& RD(T &);
 template<class T> inline void OT(const T &);
@@ -202,9 +203,6 @@ template<class T> inline T& UNQ(T &A){A.resize(unique(ALL(SRT(A)))-A.begin());re
 //}
 
 /** Constant List .. **/ //{
-const int dx8[] = {-1, 0, 1, 0 , -1 , -1 , 1 , 1};
-const int dy8[] = {0, 1, 0, -1 , -1 , 1 , -1 , 1};
-
 const int dxhorse[] = {-2 , -2 , -1 , -1 , 1 , 1 , 2 , 2};
 const int dyhorse[] = {1 ,  -1 , 2  , -2 , 2 ,-2 , 1 ,-1};
 
@@ -232,101 +230,101 @@ inline int sgn(DB x, DB y){return sgn(x - y);}
 // <<= '1. Bitwise Operation ., //{
 namespace BO{
 
-inline bool _1(int x, int i){return bool(x&1<<i);}
-inline bool _1(LL x, int i){return bool(x&1LL<<i);}
-inline LL _1(int i){return 1LL<<i;}
-inline LL _U(int i){return _1(i) - 1;};
+    inline bool _1(int x, int i){return bool(x&1<<i);}
+    inline bool _1(LL x, int i){return bool(x&1LL<<i);}
+    inline LL _1(int i){return 1LL<<i;}
+    inline LL _U(int i){return _1(i) - 1;};
 
-inline int reverse_bits(int x){
-    x = ((x >> 1) & 0x55555555) | ((x << 1) & 0xaaaaaaaa);
-    x = ((x >> 2) & 0x33333333) | ((x << 2) & 0xcccccccc);
-    x = ((x >> 4) & 0x0f0f0f0f) | ((x << 4) & 0xf0f0f0f0);
-    x = ((x >> 8) & 0x00ff00ff) | ((x << 8) & 0xff00ff00);
-    x = ((x >>16) & 0x0000ffff) | ((x <<16) & 0xffff0000);
-    return x;
-}
+    inline int reverse_bits(int x){
+        x = ((x >> 1) & 0x55555555) | ((x << 1) & 0xaaaaaaaa);
+        x = ((x >> 2) & 0x33333333) | ((x << 2) & 0xcccccccc);
+        x = ((x >> 4) & 0x0f0f0f0f) | ((x << 4) & 0xf0f0f0f0);
+        x = ((x >> 8) & 0x00ff00ff) | ((x << 8) & 0xff00ff00);
+        x = ((x >>16) & 0x0000ffff) | ((x <<16) & 0xffff0000);
+        return x;
+    }
 
-inline LL reverse_bits(LL x){
-    x = ((x >> 1) & 0x5555555555555555LL) | ((x << 1) & 0xaaaaaaaaaaaaaaaaLL);
-    x = ((x >> 2) & 0x3333333333333333LL) | ((x << 2) & 0xccccccccccccccccLL);
-    x = ((x >> 4) & 0x0f0f0f0f0f0f0f0fLL) | ((x << 4) & 0xf0f0f0f0f0f0f0f0LL);
-    x = ((x >> 8) & 0x00ff00ff00ff00ffLL) | ((x << 8) & 0xff00ff00ff00ff00LL);
-    x = ((x >>16) & 0x0000ffff0000ffffLL) | ((x <<16) & 0xffff0000ffff0000LL);
-    x = ((x >>32) & 0x00000000ffffffffLL) | ((x <<32) & 0xffffffff00000000LL);
-    return x;
-}
+    inline LL reverse_bits(LL x){
+        x = ((x >> 1) & 0x5555555555555555LL) | ((x << 1) & 0xaaaaaaaaaaaaaaaaLL);
+        x = ((x >> 2) & 0x3333333333333333LL) | ((x << 2) & 0xccccccccccccccccLL);
+        x = ((x >> 4) & 0x0f0f0f0f0f0f0f0fLL) | ((x << 4) & 0xf0f0f0f0f0f0f0f0LL);
+        x = ((x >> 8) & 0x00ff00ff00ff00ffLL) | ((x << 8) & 0xff00ff00ff00ff00LL);
+        x = ((x >>16) & 0x0000ffff0000ffffLL) | ((x <<16) & 0xffff0000ffff0000LL);
+        x = ((x >>32) & 0x00000000ffffffffLL) | ((x <<32) & 0xffffffff00000000LL);
+        return x;
+    }
 
-template<class T> inline bool odd(T x){return x&1;}
-template<class T> inline bool even(T x){return !odd(x);}
-template<class T> inline T low_bit(T x) {return x & -x;}
-template<class T> inline T high_bit(T x) {T p = low_bit(x);while (p != x) x -= p, p = low_bit(x);return p;}
-template<class T> inline T cover_bit(T x){T p = 1; while (p < x) p <<= 1;return p;}
+    template<class T> inline bool odd(T x){return x&1;}
+    template<class T> inline bool even(T x){return !odd(x);}
+    template<class T> inline T low_bit(T x) {return x & -x;}
+    template<class T> inline T high_bit(T x) {T p = low_bit(x);while (p != x) x -= p, p = low_bit(x);return p;}
+    template<class T> inline T cover_bit(T x){T p = 1; while (p < x) p <<= 1;return p;}
 
 } using namespace BO;//}
 // <<= '2. Number Theory .,//{
 namespace NT{
-inline LL __lcm(LL a, LL b){return a*b/__gcd(a,b);}
-inline void INC(int &a, int b){a += b; if (a >= MOD) a -= MOD;}
-inline int sum(int a, int b){a += b; if (a >= MOD) a -= MOD; return a;}
-inline void DEC(int &a, int b){a -= b; if (a < 0) a += MOD;}
-inline int dff(int a, int b){a -= b; if (a < 0) a  += MOD; return a;}
-inline void MUL(int &a, int b){a = (LL)a * b % MOD;}
-inline int pdt(int a, int b){return (LL)a * b % MOD;}
+    inline LL __lcm(LL a, LL b){return a*b/__gcd(a,b);}
+    inline void INC(int &a, int b){a += b; if (a >= MOD) a -= MOD;}
+    inline int sum(int a, int b){a += b; if (a >= MOD) a -= MOD; return a;}
+    inline void DEC(int &a, int b){a -= b; if (a < 0) a += MOD;}
+    inline int dff(int a, int b){a -= b; if (a < 0) a  += MOD; return a;}
+    inline void MUL(int &a, int b){a = (LL)a * b % MOD;}
+    inline int pdt(int a, int b){return (LL)a * b % MOD;}
 
-inline int sum(int a, int b, int c){return sum(sum(a, b), c);}
-inline int sum(int a, int b, int c, int d){return sum(sum(a, b), sum(c, d));}
-inline int pdt(int a, int b, int c){return pdt(pdt(a, b), c);}
-inline int pdt(int a, int b, int c, int d){return pdt(pdt(pdt(a, b), c), d);}
+    inline int sum(int a, int b, int c){return sum(sum(a, b), c);}
+    inline int sum(int a, int b, int c, int d){return sum(sum(a, b), sum(c, d));}
+    inline int pdt(int a, int b, int c){return pdt(pdt(a, b), c);}
+    inline int pdt(int a, int b, int c, int d){return pdt(pdt(pdt(a, b), c), d);}
 
-inline int pow(int a, int b){
-    int c(1); while (b){
-        if (b&1) MUL(c, a);
-        MUL(a, a), b >>= 1;
+    inline int pow(int a, int b){
+        int c(1); while (b){
+            if (b&1) MUL(c, a);
+            MUL(a, a), b >>= 1;
+        }
+        return c;
     }
-    return c;
-}
 
-inline int pow(int a, LL b){
-    int c(1); while (b){
-        if (b&1) MUL(c, a);
-        MUL(a, a), b >>= 1;
+    inline int pow(int a, LL b){
+        int c(1); while (b){
+            if (b&1) MUL(c, a);
+            MUL(a, a), b >>= 1;
+        }
+        return c;
     }
-    return c;
-}
 
-template<class T> inline T pow(T a, LL b){
-    T c(1); while (b){
-        if (b&1) c *= a;
-        a *= a, b >>= 1;
+    template<class T> inline T pow(T a, LL b){
+        T c(1); while (b){
+            if (b&1) c *= a;
+            a *= a, b >>= 1;
+        }
+        return c;
     }
-    return c;
-}
 
-inline int _I(int b){
-    int a = MOD, x1 = 0, x2 = 1, q;
-    while (true){
-        q = a / b, a %= b;
-        if (!a) return (x2 + MOD) % MOD;
-        DEC(x1, pdt(q, x2));
+    inline int _I(int b){
+        int a = MOD, x1 = 0, x2 = 1, q;
+        while (true){
+            q = a / b, a %= b;
+            if (!a) return (x2 + MOD) % MOD;
+            DEC(x1, pdt(q, x2));
 
-        q = b / a, b %= a;
-        if (!b) return (x1 + MOD) % MOD;
-        DEC(x2, pdt(q, x1));
+            q = b / a, b %= a;
+            if (!b) return (x1 + MOD) % MOD;
+            DEC(x2, pdt(q, x1));
+        }
     }
-}
 
-inline void DIV(int &a, int b){MUL(a, _I(b));}
-inline int qtt(int a, int b){return pdt(a, _I(b));}
+    inline void DIV(int &a, int b){MUL(a, _I(b));}
+    inline int qtt(int a, int b){return pdt(a, _I(b));}
 
-inline int phi(int n){
-    int res = n; for (int i=2;sqr(i)<=n;++i) if (!(n%i)){
-        DEC(res, qtt(res, i));
-        do{n /= i;} while(!(n%i));
+    inline int phi(int n){
+        int res = n; for (int i=2;sqr(i)<=n;++i) if (!(n%i)){
+            DEC(res, qtt(res, i));
+            do{n /= i;} while(!(n%i));
+        }
+        if (n != 1)
+            DEC(res, qtt(res, n));
+        return res;
     }
-    if (n != 1)
-        DEC(res, qtt(res, n));
-    return res;
-}
 
 };// using namespace NT;//}
 //}
@@ -582,12 +580,6 @@ inline DB& RF(DB &x){
     while ((t=getchar())!=' '&&t!='\n'&&t!='.')x*=10,x+=t-'0';
     if (t=='.'){DB l=1; while ((t=getchar())!=' '&&t!='\n')l*=0.1,x += (t-'0')*l;}*/
     return x;
-}
-
-inline char* RS(char *s){
-    //gets(s);
-    scanf("%s", s);
-    return s;
 }
 
 int Case; template<class T> inline void OT(const T &x){
