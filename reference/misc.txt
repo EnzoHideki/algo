@@ -44,3 +44,25 @@ toupper(x) -> converte minúscula para maiúscula
 insert (size_t pos, const string& str) -> Inserts before the character indicated by pos (or p) [O(n)]
 erase (size_t pos = 0, size_t len = npos) [O(n)]
 substr (size_t pos = 0, size_t len = npos) const; [O(len)]
+
+
+#include<bitset>
+operator[] access bit (from rightmost to leftmost)
+count: count bits set
+size
+test: return bit value
+any: test if any bit is set
+none: test if no bit is set
+all (c++11): test if all bits are set
+set(): set all bits
+set(size_t pos, bool val = true): Sets val as the value for the bit at position pos
+reset(): reset all bits
+reset(size_t pos): reset bit at pos
+flip(): flip all bits
+flip(size_t pos): flip bit at pos
+to_string
+to_ulong
+to_ullong
+operators:
+^, &, |, <<, >>, ~, ==, !=
+
