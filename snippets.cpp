@@ -1,4 +1,5 @@
-#define dbv(x) cerr << #x << " == [ "; for (int i=0; i<int(x.size()); i++) { cerr << x[i] << " "; } cerr << "]\n";
+#define dbv(x, n) cerr << #x << " == [ "; for (int i=0; i<int(n); i++) { cerr << x[i] << " "; } cerr << "]\n";
+#define foreach(a,b) for(__typeof((b).begin()) a = (b).begin(); a != (b).end(); ++a)
 
 template <class T>
 inline void sortunique(vector<T> &v) {
@@ -53,8 +54,6 @@ template<class T, class U> ostream& operator << (ostream& out, pair<T,U>& p) {
 #include <sstream>
 #include <numeric>
 
-using namespace std;
-
 #define REP_C(i, n) for (int n____=int(n),i=0;i<n____;++i)
 #define FOR_C(i, a, b) for (int b____=int(b),i=a;i<b____;++i)
 #define DWN_C(i, b, a) for (int a____=int(a),i=b-1;i>=a____;--i)
@@ -74,7 +73,6 @@ using namespace std;
 #define FOR_1_C_N(i, a, b) for (int b____=(i=1,int(b);i<=b____;++i)
 #define DWN_1_C_N(i, b, a) for (int a____=(i=b,int(a));i>=a____;--i)
 
-#define ECH(it, A) for (__typeof(A.begin()) it=A.begin(); it != A.end(); ++it)
 #define REP_S(i, str) for (char*i=str;*i;++i)
 #define REP_L(i, hd, nxt) for (int i=hd;i;i=nxt[i])
 #define REP_G(i, u) REP_L(i,hd[u],suc)
@@ -203,9 +201,6 @@ template<class T> inline T& UNQ(T &A){A.resize(unique(ALL(SRT(A)))-A.begin());re
 //}
 
 /** Constant List .. **/ //{
-const int dxhorse[] = {-2 , -2 , -1 , -1 , 1 , 1 , 2 , 2};
-const int dyhorse[] = {1 ,  -1 , 2  , -2 , 2 ,-2 , 1 ,-1};
-
 //int MOD = 99990001;
 //}
 
