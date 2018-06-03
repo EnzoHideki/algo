@@ -331,20 +331,17 @@ namespace NT{
 namespace Math{
 	typedef long long typec;
 	///Lib functions
-	typec GCD(typec a, typec b)
-	{
+	typec GCD(typec a, typec b) {
 		return b ? GCD(b, a % b) : a;
 	}
-	typec extendGCD(typec a, typec b, typec& x, typec& y)
-	{
+	typec extendGCD(typec a, typec b, typec& x, typec& y) {
 		if(!b) return x = 1, y = 0, a;
 		typec res = extendGCD(b, a % b, x, y), tmp = x;
 		x = y, y = tmp - (a / b) * y;
 		return res;
 	}
 	///for x^k
-	typec power(typec x, typec k)
-	{
+	typec power(typec x, typec k) {
 		typec res = 1;
 		while(k)
 		{
@@ -354,8 +351,7 @@ namespace Math{
 		return res;
 	}
 	///for x^k mod m
-	typec powerMod(typec x, typec k, typec m)
-	{
+	typec powerMod(typec x, typec k, typec m) {
 		typec res = 1;
 		while(x %= m, k)
 		{
@@ -367,8 +363,7 @@ namespace Math{
 	/***************************************
 	Inverse in mod p^t system
 	***************************************/
-	typec inverse(typec a, typec p, typec t = 1)
-	{
+	typec inverse(typec a, typec p, typec t = 1) {
 		typec pt = power(p, t);
 		typec x, y;
 	    y = extendGCD(a, pt, x, y);
@@ -380,8 +375,7 @@ namespace Math{
 	x = b (mod q)
 	for gcd(p, q) = 1, 0 <= x < pq
 	***************************************/
-	typec linearCongruence(typec a, typec b, typec p, typec q)
-	{
+	typec linearCongruence(typec a, typec b, typec p, typec q) {
 		typec x, y;
 		y = extendGCD(p, q, x, y);
 		while(b < a) b += q / y;
@@ -396,16 +390,13 @@ namespace Math{
 	const int PRIMERANGE = 1000000;
 	int prime[PRIMERANGE + 1];
 	int mobius[PRIMERANGE + 1];
-	int getPrime()
-	{
+	int getPrime() {
 		memset (prime, 0, sizeof (int) * (PRIMERANGE + 1));
 		memset(mobius , 0 , sizeof(mobius));
 		mobius[1] = 1;
-		for (int i = 2; i <= PRIMERANGE; i++)
-		{
+		for (int i = 2; i <= PRIMERANGE; i++) {
 			if (!prime[i]) prime[++prime[0]] = i , mobius[i] = -1;
-			for (int j = 1; j <= prime[0] && prime[j] <= PRIMERANGE / i; j++)
-			{
+			for (int j = 1; j <= prime[0] && prime[j] <= PRIMERANGE / i; j++) {
 				prime[prime[j]*i] = 1;
 				if (i % prime[j] == 0) break;
 				else mobius[i * prime[j]] = -mobius[i];
@@ -424,12 +415,10 @@ namespace Math{
 	***************************************/
 	///you should init the prime table before
 	int factor[100][3], facCnt;
-	int getFactors(int x)
-	{
+	int getFactors(int x) {
 		facCnt = 0;
 		int tmp = x;
-		for(int i = 1; prime[i] <= tmp / prime[i]; i++)
-		{
+		for(int i = 1; prime[i] <= tmp / prime[i]; i++) {
 			factor[facCnt][1] = 1, factor[facCnt][2] = 0;
 			if(tmp % prime[i] == 0)
 				factor[facCnt][0] = prime[i];
@@ -441,14 +430,12 @@ namespace Math{
 			factor[facCnt][0] = tmp, factor[facCnt][1] = tmp, factor[facCnt++][2] = 1;
 		return facCnt;
 	}
-	typec combinationModP(typec n, typec k, typec p)
-	{
+	typec combinationModP(typec n, typec k, typec p) {
 		if(k > n) return 0;
 		if(n - k < k) k = n - k;
 		typec a = 1, b = 1, x, y;
 		int pcnt = 0;
-		for(int i = 1; i <= k; i++)
-		{
+		for(int i = 1; i <= k; i++) {
 			x = n - i + 1, y = i;
 			while(x % p == 0) x /= p, pcnt++;
 			while(y % p == 0) y /= p, pcnt--;
@@ -467,94 +454,92 @@ namespace Math{
 namespace Geo{
 	#define typec double
     const typec eps=1e-9;
-int dblcmp(double d)
-{
-    return d < -eps ? -1 : d > eps;
-}
-inline double sqr(double x){return x*x;}
-struct point {
-    double x,y;
-    point(){}
-    point(double _x, double _y) : x(_x),y(_y){};
-    void input() {
-        scanf("%lf%lf",&x,&y);
+    int dblcmp(double d) {
+        return d < -eps ? -1 : d > eps;
     }
-    void output() {
-        printf("%.2f %.2f\n",x,y);
-    }
-    bool operator==(point a)const {
-        return dblcmp(a.x-x)==0&&dblcmp(a.y-y)==0;
-    }
-    bool operator<(point a)const {
-        return dblcmp(a.x-x)==0?dblcmp(y-a.y)<0:x<a.x;
-    }
-    double len() {
-        return hypot(x,y);
-    }
-    double len2() {
-        return x*x+y*y;
-    }
-    double distance(point p) {
-        return hypot(x-p.x,y-p.y);
-    }
-    double distance2(point p) {
-        return sqr(x-p.x)+sqr(y-p.y);
-    }
-    point add(point p) {
-        return point(x+p.x,y+p.y);
-    }
-    point operator + (const point & p) const{
-        return point(x+p.x,y+p.y);
-    }
-    point sub(point p) {
-        return point(x-p.x,y-p.y);
-    }
-    point operator - (const point & p) const{
-        return point(x-p.x,y-p.y);
-    }
-    point mul(double b) {
-        return point(x*b,y*b);
-    }
-    point div(double b) {
-        return point(x/b,y/b);
-    }
-    double dot(point p) {
-        return x*p.x+y*p.y;
-    }
-    double operator * (const point & p) const{
-        return x*p.x+y*p.y;
-    }
-    double det(point p) {
-        return x*p.y-y*p.x;
-    }
-    double operator ^ (const point & p) const{
-        return x*p.y-y*p.x;
-    }
-    double rad(point a,point b) {
-    	point p=*this;
-    	return fabs(atan2(fabs(a.sub(p).det(b.sub(p))),a.sub(p).dot(b.sub(p))));
-	}
-    point trunc(double r)
-	{
-		double l=len();
-		if (!dblcmp(l))return *this;
-		r/=l;
-		return point(x*r,y*r);
-	}
-    point rotleft() {
-        return point(-y,x);
-    }
-    point rotright() {
-        return point(y,-x);
-    }
-    point rotate(point p,double angle)//�Ƶ�p��ʱ����תangle�Ƕ�
-    {
-        point v=this->sub(p);
-        double c=cos(angle),s=sin(angle);
-        return point(p.x+v.x*c-v.y*s,p.y+v.x*s+v.y*c);
-    }
-#undef typec
-};
+    inline double sqr(double x){return x*x;}
+    struct point {
+        double x,y;
+        point(){}
+        point(double _x, double _y) : x(_x),y(_y){};
+        void input() {
+            scanf("%lf%lf",&x,&y);
+        }
+        void output() {
+            printf("%.2f %.2f\n",x,y);
+        }
+        bool operator==(point a)const {
+            return dblcmp(a.x-x)==0&&dblcmp(a.y-y)==0;
+        }
+        bool operator<(point a)const {
+            return dblcmp(a.x-x)==0?dblcmp(y-a.y)<0:x<a.x;
+        }
+        double len() {
+            return hypot(x,y);
+        }
+        double len2() {
+            return x*x+y*y;
+        }
+        double distance(point p) {
+            return hypot(x-p.x,y-p.y);
+        }
+        double distance2(point p) {
+            return sqr(x-p.x)+sqr(y-p.y);
+        }
+        point add(point p) {
+            return point(x+p.x,y+p.y);
+        }
+        point operator + (const point & p) const{
+            return point(x+p.x,y+p.y);
+        }
+        point sub(point p) {
+            return point(x-p.x,y-p.y);
+        }
+        point operator - (const point & p) const{
+            return point(x-p.x,y-p.y);
+        }
+        point mul(double b) {
+            return point(x*b,y*b);
+        }
+        point div(double b) {
+            return point(x/b,y/b);
+        }
+        double dot(point p) {
+            return x*p.x+y*p.y;
+        }
+        double operator * (const point & p) const{
+            return x*p.x+y*p.y;
+        }
+        double det(point p) {
+            return x*p.y-y*p.x;
+        }
+        double operator ^ (const point & p) const{
+            return x*p.y-y*p.x;
+        }
+        double rad(point a,point b) {
+        	point p=*this;
+        	return fabs(atan2(fabs(a.sub(p).det(b.sub(p))),a.sub(p).dot(b.sub(p))));
+    	}
+        point trunc(double r) {
+    		double l=len();
+    		if (!dblcmp(l))return *this;
+    		r/=l;
+    		return point(x*r,y*r);
+    	}
+        point rotleft() {
+            return point(-y,x);
+        }
+        point rotright() {
+            return point(y,-x);
+        }
+        point rotate(point p,double angle)//�Ƶ�p��ʱ����תangle�Ƕ�
+        {
+            point v=this->sub(p);
+            double c=cos(angle),s=sin(angle);
+            return point(p.x+v.x*c-v.y*s,p.y+v.x*s+v.y*c);
+        }
+    #undef typec
+    };
 };//using namespace Geo;
 //}
 //}
