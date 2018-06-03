@@ -45,7 +45,7 @@ inline void dbm(mat m) {
 }
 
 // print pair
-template<class T, class U> ostream& operator << (ostream& out, pair<T,U>& p) {
+template<class T, class U> ostream& operator << (ostream& out, const pair<T,U>& p) {
     out << "{" << p.first << "," << p.second << "}";
     return out;
 }
