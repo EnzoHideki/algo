@@ -40,4 +40,4 @@ ans:
 .
 ```
 
-Then, run ```python check.py [file name]```
+Then, run ```python check.py [solution's file name]```
