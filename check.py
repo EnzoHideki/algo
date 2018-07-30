@@ -38,10 +38,10 @@ while i < len(lines):
 		ans = out.read()
 
 		if (s == ans):
-			print "Test " + str(test) + ": ok\n"
+			print("Test " + str(test) + ": ok")
 		else:
-			print "Test " + str(test) + ": wa (or presentation error)"
-			print "Correct answer:"
-			print s
-			print "Author's answer:"
-			print ans
+			print("Test " + str(test) + ": wa (or presentation error)")
+			print("Correct answer:")
+			print(s)
+			print("Author's answer:")
+			print(ans)
