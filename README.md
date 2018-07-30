@@ -20,7 +20,7 @@ ans:
 ```
 
 ## check.py
-Script to run tests in a single file. It uses python 2.
+Script to run tests in a single file.
 
 How to use: 
 
