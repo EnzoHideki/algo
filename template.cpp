@@ -17,12 +17,12 @@
 #include <queue>
 #include <set>
 #include <sstream>
+#include <stack>
 #include <unistd.h>
 #include <utility>
 #include <vector>
 #define dbc(x) cerr << x << '\n'
 #define dbn(x) cerr << #x << " == " << x << '\n'
-#define pb push_back
 #define endl '\n'
 
 using namespace std;
