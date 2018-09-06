@@ -2,6 +2,9 @@
 #define foreach(a,b) for(__typeof((b).begin()) a = (b).begin(); a != (b).end(); ++a)
 #define dbm(v, n, m) cerr << #v << ":\n"; for (int i=0; i<n; i++) for (int j=0; j<m; j++) cerr << v[i][j] << " \n"[j == m-1];
 
+#define dbco(x) cerr << #x << " == [ "; for (auto ii : x) { cerr << ii << " "; } cerr << "]\n";
+#define dbmp(x) cerr << #x << " == [ "; for (auto ii : x) { cerr << "{" << ii.first << ": " << ii.second << "} "; } cerr << "]\n";
+
 template <class T>
 inline void sortunique(vector<T> &v) {
     sort(v.begin(), v.end());
