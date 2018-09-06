@@ -1,11 +1,13 @@
 // O(V*E*E) time, O(V*V) memory
 
-int n;
-vector<vector<int>> capacity;
+const int MAXN = 112;
+const int INF = 0x3f3f3f3f;
+int capacity[MAXN][MAXN];
 vector<vector<int>> adj;
+int parent[MAXN];
 
-int bfs(int s, int t, vector<int>& parent) {
-    fill(parent.begin(), parent.end(), -1);
+int bfs(int s, int t) {
+    memset(parent, -1, sizeof parent);
     parent[s] = -2;
     queue<pair<int, int>> q;
     q.push({s, INF});
@@ -16,7 +18,7 @@ int bfs(int s, int t, vector<int>& parent) {
         q.pop();
 
         for (int next : adj[cur]) {
-            if (parent[next] == -1 && capacity[cur][next]) {
+            if (parent[next] == -1 && capacity[cur][next] > 0) {
                 parent[next] = cur;
                 int new_flow = min(flow, capacity[cur][next]);
                 if (next == t) return new_flow;
@@ -30,9 +32,8 @@ int bfs(int s, int t, vector<int>& parent) {
 
 int maxflow(int s, int t) {
     int flow = 0;
-    vector<int> parent(n);
 
-    while (int new_flow = bfs(s, t, parent)) {
+    while (int new_flow = bfs(s, t)) {
         flow += new_flow;
         int cur = t;
         while (cur != s) {
