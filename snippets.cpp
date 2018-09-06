@@ -1,11 +1,20 @@
 #define dbv(x, n) cerr << #x << " == [ "; for (int i=0; i<int(n); i++) { cerr << x[i] << " "; } cerr << "]\n";
 #define foreach(a,b) for(__typeof((b).begin()) a = (b).begin(); a != (b).end(); ++a)
-#define dbm(v, n, m) cerr << #x << ":\n"; for (int i=0; i<n; i++) for (int j=0; j<m; j++) cerr << v[i][j] << " \n"[j == m-1];
+#define dbm(v, n, m) cerr << #v << ":\n"; for (int i=0; i<n; i++) for (int j=0; j<m; j++) cerr << v[i][j] << " \n"[j == m-1];
 
 template <class T>
 inline void sortunique(vector<T> &v) {
     sort(v.begin(), v.end());
     v.resize(distance(v.begin(), unique(v.begin(), v.end())));
+}
+
+vector<string> split(const string& s, const string& del) {
+    vector<string> ret;
+    char* cs = (char *) malloc(s.size() + 10);
+    strcpy(cs, s.c_str());
+    for (char* p = strtok(cs, del.c_str()); p; p = strtok(NULL, del.c_str()))
+        ret.push_back(string(p));
+    return ret;
 }
 
 struct mat {
