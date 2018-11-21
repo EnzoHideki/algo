@@ -1,6 +1,8 @@
 int z[112];
 
 void z_algo(string s) {
+	memset(z, 0, sizeof z);
+	
 	int n = s.size();
 	int L = 0, R = 0;
 	for (int i = 1; i < n; i++) {
